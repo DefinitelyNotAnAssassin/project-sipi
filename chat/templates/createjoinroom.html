@@ -1,0 +1,98 @@
+{% extends "chatbase.html" %}
+
+{% block title %} Project - SIPI {% endblock %}
+{% block head %}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class ="d-flex flex-column min-vh-100 justify-content-center align-items-center">  
+
+
+
+  <h1>Project SIPI</h1>
+
+<!-- Create Room Modal -->
+<button type="button" class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Create Room
+</button>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Room</h5>
+        
+      </div>
+      <div class="modal-body">
+        
+        
+        <form class="form-control" action="/create_room" method="post" accept-charset="utf-8">
+      {{form.csrf_token}}
+       {{form.Room_Id(autocomplete = "off", placeholder = "Room ID")}}
+      {{form.Room_Code(autocomplete = "off", placeholder = "Room Code")}}
+      <button class = "btn btn-secondary" type="submit">Create Room</button>
+          
+          
+        </form>
+        
+        
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Join Room Modal -->
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticJoinRoom">
+  Join Room
+</button>
+
+
+<div class="modal fade" id="staticJoinRoom" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Join Room</h5>
+     
+      </div>
+      <div class="modal-body">
+        
+        <form action="/join_room" method="post" accept-charset="utf-8">
+{{form.csrf_token}}
+      {{form.Room_Id(autocomplete = "off", placeholder = "Room ID")}}
+      {{form.Room_Code(autocomplete = "off", placeholder = "Room Code")}}
+          <button type="submit" class="btn btn-secondary">Join Room</button>
+        </form>
+        
+        
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+{% endblock %}
