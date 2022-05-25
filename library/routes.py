@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, session, redirect, url_for
 from .form import SearchForm
 from ..models.library import Books
+from ..extensions import login_required
 library = Blueprint('library', __name__, template_folder="./templates")
 
 @library.route("/")
@@ -29,3 +30,14 @@ def readlist():
   elif "read_later" not in session:
     return redirect(url_for('library.index'))
 
+
+@library.route("/feedback/<bookname>")
+@login_required
+def feedback(bookname):
+  exists = Books.query.filter(Books.bookname == bookname).first()
+  print(bookname)
+  if exists:
+    return render_template("feedback.html", bookname = bookname)
+  else:
+    return "Bookname doesn't exists"
+  

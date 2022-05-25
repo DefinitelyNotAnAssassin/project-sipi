@@ -10,7 +10,9 @@
 
 
 
-{% for i in file %}
+{% for category in file %}
+
+ {% for i in category %}
 
 <div class="card" style="width: 100vw;">
   <div class="card-body">
@@ -23,8 +25,13 @@
 
     <a href="/view?book={{i.filename}}" class="card-link mx-1">Read</a>
 <a href="/addreadlist/{{i.bookname}}" class="card-link mx-2">Read Later</a>
+<a href="/feedback/{{i.bookname}}" class="card-link mx-2">Review</a>
+
+
   </div>
 </div>
+
+{% endfor %}
 
 {% endfor %}
 

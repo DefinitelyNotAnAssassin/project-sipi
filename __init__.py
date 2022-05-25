@@ -2,7 +2,7 @@ from flask import Flask
 from .library.routes import library
 from .chat.routes import chat
 from .extensions import db,  bcrypt, login, socketio
-from .api.routes import library_api
+from .api.library_api import library_api
 from .api.chat_api import chat_api
 from .models.chat import user
 from .user.routes import user_route
@@ -22,10 +22,9 @@ def create_app():
     login.init_app(app)
     socketio.init_app(app)
     login.blueprint_login_views = {
-        'chat': '/login'
+        'chat': '/login',
+        'library': '/login'
     }
-
-
 
     with app.app_context():
         db.create_all()

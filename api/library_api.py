@@ -10,7 +10,8 @@ library_api = Blueprint('library_api', __name__)
 def send_title():
   data = request.get_json()
   qry = Category.query.filter(Category.book_category == data['category']).first()
-  qry = [(i.bookname) for i in qry.booklist.filter(Books.bookname.like(data["search"])).limit(10)]
+  #qry = [(i.bookname) for i in qry.booklist.filter(Books.bookname.like(data["search"])).limit(10)]
+  #qry = [i.booklist.filter(Books.bookname.like(search)).limit(5).all() for i in result]
   return json.dumps(qry)
   
 
@@ -22,8 +23,12 @@ def search():
     form = SearchForm()
     if form.validate_on_submit():
       search = f"%{form.Title.data}%"
-      result = Category.query.filter(Category.book_category == form.Category.data).first()
-      return render_template("testresult.html", file = result.booklist.filter(Books.bookname.like(search)).limit(15))
+      result = Category.query.filter(Category.book_category.in_(form.Category.data)).all()
+      print(form.Category.data)
+      file = [i.booklist.filter(Books.bookname.like(search)).limit(5).all() for i in result]
+      print(file)
+      print(12356)
+      return render_template("testresult.html", file = file)
     else:
       print(form.errors)
       return "Form Error!"
