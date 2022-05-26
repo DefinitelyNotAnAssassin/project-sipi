@@ -9,7 +9,7 @@ from .user.routes import user_route
 from .api.login_api import login_api
 from .api.socket_api import socket_api
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
     app.secret_key = "dakflksd foi!5aweoB"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///library.sqlite3"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

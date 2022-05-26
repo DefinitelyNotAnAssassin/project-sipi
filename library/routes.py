@@ -8,6 +8,7 @@ library = Blueprint('library', __name__, template_folder="./templates")
 @library.route("/")
 def index():
     form = SearchForm()
+    print(123)
     return render_template("index.html", form = form)
 
 

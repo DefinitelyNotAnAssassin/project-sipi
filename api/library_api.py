@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect, render_template, url_for, send_from_directory, abort, session
-from ..extensions import json
+from ..extensions import json, time
 from ..models.library import Books, Category
 from ..library.form import SearchForm
 import os
@@ -8,8 +8,16 @@ library_api = Blueprint('library_api', __name__)
 
 @library_api.route("/get_title", methods = ["POST"])
 def send_title():
+  start = time.time()
   data = request.get_json()
-  qry = Category.query.filter(Category.book_category == data['category']).first()
+  qry = Category.query.filter(Category.book_category.in_(data['category'])).all()
+  qry = [i.booklist.filter(Books.bookname.like(data["search"])).limit(3).all() for i in qry]
+  print(qry)
+  qry = [(x.bookname) for i in qry for x in i]
+  print(qry)
+  end = time.time()
+  
+  print(f"Transaction Time: {end-start}")
   #qry = [(i.bookname) for i in qry.booklist.filter(Books.bookname.like(data["search"])).limit(10)]
   #qry = [i.booklist.filter(Books.bookname.like(search)).limit(5).all() for i in result]
   return json.dumps(qry)
