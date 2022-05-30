@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+Welcome to the upload page
+
+<br>
+<form action="/addbook" method="post" enctype="multipart/form-data">
+{{form.csrf_token}}
+{{form.Bookname(class = "form-control", placeholder = "Bookname")}}
+{{form.Authorname(class = "form-control", placeholder = "Authorname")}}
+{{form.Sourcelink(class = "form-control", placeholder  = "Sourcelink")}}
+{{form.YearPublished( class = "form-control", placeholder = "Year Published")}}
+{{form.Tags(class = "form-control")}}
+{{form.Category(class = "form-control")}}
+{{form.File(class = "form-control")}}
+<button type="submit" class="btn btn-secondary">Add Book</button>
+</form>
+{% endblock %}

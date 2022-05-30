@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+List of Room:
+
+{% for i in grouplist %}
+
+<div class="card">
+  <a href="/room/{{i.groupid}}">{{i.groupid}}</a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

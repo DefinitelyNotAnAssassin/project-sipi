@@ -1,0 +1,39 @@
+{% extends "userbase.html" %}
+
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+ <div class ="d-flex flex-column min-vh-100 justify-content-center align-items-center">  
+ <form action = "/login_user" method = "post">
+  <div class="form-row align-items-center">
+  <h4 class = "mx-auto mb-3"> Login Page </h4>
+  
+  {{form.csrf_token}}
+    <div class="col-md-12 mb-2">
+   {{form.Username(placeholder = "Username", class = "form-control form-control-sm", autocomplete = "off")}}
+    <small class="form-text text-muted">Not yet registered? Click <a href="/register">here</a></small>
+    </div>
+    
+    <div class = "col-md-12 mb-4">
+    {{form.Password(placeholder = "Password", class = "form-control form-control-sm mb-3")}}
+    
+    <input type="hidden" value = "{{request.args.get('next', '')}}"  name="next">
+      <button type="submit" class="btn btn-primary col-12 mt-2">Sign In</button>
+    
+    
+  </div>
+
+</div>
+</form>
+</div>
+
+
+
+
+
+
+{% endblock %}

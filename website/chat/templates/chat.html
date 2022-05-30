@@ -1,0 +1,52 @@
+{% extends "chatbase.html" %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static', filename = 'chat.css')}}" type="text/css" media="all" />
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card title mb-3">
+  
+ Room: #{{roomid}}
+  
+</div>
+
+
+
+<div class="newentry card" id="newentry">
+  
+{% for message in msg %}
+
+<div class="card mb-2">
+ <h6 class="mb-1">{{message.sender}}</h1>
+  {{message.content}}</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+
+<span class="input-group">
+       {{form.Message(class = "msg-input form-control", placeholder = "Enter message", autocomplete = "off")}} 
+       {{form.Send_Message(class = "btn btn-secondary")}}
+</span>
+
+{% endblock %}
+
+{% block script %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js" integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="{{url_for('static', filename = "chat.js")}}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

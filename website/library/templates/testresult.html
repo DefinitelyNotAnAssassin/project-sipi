@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block title %} Test Result {% endblock %} 
+
+
+
+{% block content %}
+
+
+
+
+ {% for i in file %}
+
+<div class="card" style="width: 100vw;">
+  <div class="card-body">
+    <h5 class="card-title mb-1">{{i.bookname}}</h5>
+
+
+    <h6 class="text-muted"> {{i.authorname}}, ({{i.year_published}}), {{i.bookname}}, Retrieved from: <a href="{{i.sourcelink}}">{{i.sourcelink}}</a></h6>
+ 
+    </h6>
+
+    <br>
+    Tags:
+    <br>
+    {% for x in i.tag_name.all() %}
+      <b>{{x.tagname}}</b>
+<br>
+    {% endfor %}
+    <br>
+    <h6 class="text-muted">Uploaded: {{i.upload_date}}</h6>
+   
+  <br>
+  <br>
+    <a href="/view?book={{i.filename}}" class="card-link mx-1">Read</a>
+<a href="/addreadlist/{{i.bookname}}" class="card-link mx-2">Read Later</a>
+<a href="/feedback/{{i.bookname}}" class="card-link mx-2">Review</a>
+
+
+  </div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %} 
+
+
+{% block script %} 
+
+<script src="{{url_for('static', filename = "jquery.js")}}" type="text/javascript" charset="utf-8"></script>
+
+<script src="{{url_for('static', filename = "/jquery-ui-1.13.1/jquery-ui-1.13.1/jquery-ui.js")}}" type="text/javascript" charset="utf-8"></script>
+
+{% endblock %}
